@@ -5,7 +5,7 @@ include ('source/layout.php');
 $id = $_GET['id'] ;
 include ('source/header2.php');
 ?>
-	<div class="page-index">
+  <div class="page-index">
           <div class="container">
             <p>
               Home - Products List
@@ -64,7 +64,7 @@ include ('source/header2.php');
 
                 $next_page = $current_page + 1;
                 $prev_page = $current_page - 1;
-                $num_sql = mysql_query("select count(*) as num_rows from san_pham where id_danh_muc = '$id' " );
+                $num_sql = mysql_query("select count(*) as num_rows from san_pham where id_nhasx = '$id' " );
                 $c_rows = mysql_fetch_array($num_sql);
                 $num_rows = $c_rows['num_rows'];
                 $num_pages = ceil($num_rows / $limit);
@@ -76,21 +76,21 @@ include ('source/header2.php');
                 $offset = ($current_page - 1) * $limit;
                 ?>
                 <ul class="products-listItem">
-				<?php
-                  $sql = mysql_query("select * from san_pham where id_danh_muc = '$id' limit $offset, $limit ");
+        <?php
+                  $sql = mysql_query("select * from san_pham where id_nhasx = '$id' limit $offset, $limit ");
                 while ($rows = mysql_fetch_array($sql)) {
 
                   ?>
                   <li class="products">
-				  <?php 
-				  if($rows['giam_gia'] != null)
-				  {?>
+          <?php 
+          if($rows['giam_gia'] != null)
+          {?>
                     <div class="offer">
                       <?php echo '-'.$rows['giam_gia'].'%'?>
                     </div>
-					<?php }
-					?>
-					
+          <?php }
+          ?>
+          
                     <div class="thumbnail"><a href='details.php?id=<?php echo $rows[0] ?>'>
                       <img src="hinh/<?php echo $rows['hinh_anh'] ?>" alt="Product Name">
                     </div>
@@ -111,22 +111,22 @@ include ('source/header2.php');
                         <div class="price">
                           <span class="new_price">
                             <?php $gia_cu = $rows['gia_tien'];
-					  		$sale = $rows['giam_gia'];
-					  		$giam_gia = $gia_cu * $sale/100;
-					  		$gia_moi = $gia_cu - $giam_gia;
-					  		if ($rows['giam_gia'] == null)
-					  		{
-						  	$gia_moi = $gia_cu;
-					  		}
-					  		echo number_format($gia_moi); ?>
+                $sale = $rows['giam_gia'];
+                $giam_gia = $gia_cu * $sale/100;
+                $gia_moi = $gia_cu - $giam_gia;
+                if ($rows['giam_gia'] == null)
+                {
+                $gia_moi = $gia_cu;
+                }
+                echo number_format($gia_moi); ?>
                             <sup>
                               $
                             </sup>
                           </span>
                           <span class="old_price">
                             <?php echo number_format($rows['gia_tien']);
-							$proId = $rows['id_san_pham'];
-							?>
+              $proId = $rows['id_san_pham'];
+              ?>
                             <sup>
                               $
                             </sup>
@@ -134,8 +134,8 @@ include ('source/header2.php');
                         </div>
                         <div class="button_group">
                           <?php 
-							if (isset($_SESSION['username']) == true) {
-		   		    		?>
+              if (isset($_SESSION['username']) == true) {
+                  ?>
                           <button class="button add-cart" data-prodid = "<?php echo $proId?>" type="button" name="btnAddToCart" > Add To Cart </button>
                           <button class="button compare">
                             <i class="fa fa-exchange">
@@ -145,7 +145,7 @@ include ('source/header2.php');
                             <i class="fa fa-heart-o">
                             </i>
                           </button>
-						  <?php } ?>
+              <?php } ?>
                         </div>
                       </div>
                     </div>
